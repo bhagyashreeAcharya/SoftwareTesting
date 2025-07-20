@@ -71,7 +71,15 @@ Syntax : driver.findElement(By.name("Login"));
  tagName for any element such as button , <p> </p> etc
  Attribute like class , id etc
 
- 
+ *> Two Types of XPATH :
+ !!! Absolute XPath - It traverses from the root node to the whole DOM to reach the element. It
+ starts with a single forward slash(/)
+ > Disadvantage : If there any changes in XPATH then it will fail
+ Example : /html/body/div[2]/div/form/div/div/input[2]
+
+ !!! Relative XPAth : It starts with double slash (//). It can search element anywhere on the page
+ > Advantage : No need to write the long Xpath and it can start from the middle of the HTML DOM
+ Example : //input[@value='Continue']
 
 
  **/
@@ -80,6 +88,7 @@ Syntax : driver.findElement(By.name("Login"));
 package org.example;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -140,9 +149,19 @@ public class LocatorStrategiesIntro {
 
         String OneExample = driver.findElement(By.className("dropdown-toggle")).getText();
         System.out.println("Class first eleement is" + OneExample);
+
+//        Lets use Xpath
+        driver.findElement(By.xpath("//input[@name='search']")).sendKeys(Keys.ENTER);
+       if (driver.findElement(By.xpath("//label[@class='control-label']")).isDisplayed()){
+           System.out.println("Successfully wend to search page");
+       }else {
+           System.out.println("Unsusseffull to go on search page");
+       }
+        driver.navigate().back();
+
+
+
     }
-
-
 
 
 }
